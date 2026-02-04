@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Kinematics Research & Simulation Portal</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+  <div class="header">
+    <h1>Advanced Simulation Lab</h1>
+    <p>Project Archive: 2026 Virtual Environments</p>
+  </div>
+
+  <div id="game-display">
+    <div id="placeholder-text">Select a data module below to initialize simulation...</div>
+    <iframe id="game-frame" src="" width="100%" height="600px" style="display:none;" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <hr style="border: 1px solid #444; margin: 40px 0;">
+
+  <div class="grid-container">
+    
+    <div class="game-card" onclick="loadGame('https://2pu896.csb.app/')">
+      <img src="https://upload.wikimedia.org/wikipedia/en/3/33/Super_Mario_64_box_art.jpg" alt="Physics Sim 64">
+      <p>Module 64: Gravitational Vectors</p>
+    </div>
+
+    <div class="game-card" onclick="loadGame('https://classic.minecraft.net/')">
+      <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png" alt="Voxel Sim">
+      <p>Module MC: Voxel Rendering</p>
+    </div>
+
+    <div class="game-card" onclick="loadGame('https://iammyguy21th.github.io/polytrack.3/')">
+      <img src="https://play-lh.googleusercontent.com/6X9mY-v7XW5u3bE7p9I5hN8zGz-k1Y2r1z_1S9D9z1X_yR-8p0uQ" alt="Momentum Sim">
+      <p>Module PT: High-Velocity Kinematics</p>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
