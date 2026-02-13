@@ -1,58 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Kinematics Research & Simulation Portal</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecular Dynamics Simulation Lab</title>
+    <style>
+        /* DESIGN: Making it look like a real science portal */
+        body { font-family: 'Courier New', Courier, monospace; background-color: #0d1117; color: #58a6ff; margin: 0; padding: 20px; text-align: center; }
+        .header { border-bottom: 2px solid #30363d; padding-bottom: 20px; margin-bottom: 30px; }
+        h1 { color: #f0f6fc; }
+        
+        /* THE GAME PLAYER */
+        #display-container { width: 90%; max-width: 900px; height: 550px; margin: 0 auto; background: #000; border: 1px solid #30363d; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+        iframe { width: 100%; height: 100%; border: none; display: none; }
+        .placeholder { color: #8b949e; font-style: italic; }
+
+        /* THE GRID */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
+        .module-btn { background: #21262d; border: 1px solid #30363d; color: #c9d1d9; padding: 15px; cursor: pointer; border-radius: 6px; transition: 0.2s; }
+        .module-btn:hover { background: #30363d; border-color: #8b949e; color: #58a6ff; }
+        .module-btn span { display: block; font-size: 12px; color: #8b949e; margin-bottom: 5px; }
+    </style>
 </head>
 <body>
 
-  <div class="header">
-    <h1>Advanced Simulation Lab</h1>
-    <p>Project Archive: 2026 Virtual Environments</p>
-  </div>
-
-  <div id="game-display">
-    <div id="placeholder-text">Select a data module below to initialize simulation...</div>
-    <iframe id="game-frame" src="" width="100%" height="600px" style="display:none;" frameborder="0" allowfullscreen></iframe>
-  </div>
-
-  <hr style="border: 1px solid #444; margin: 40px 0;">
-
-  <div class="grid-container">
-    
-    <div class="card" onclick="loadGame('https://2pu896.csb.app/')">
-      <img src="https://upload.wikimedia.org/wikipedia/en/3/33/Super_Mario_64_box_art.jpg" alt="Physics Sim 64">
-      <p>Module 64: Gravitational Vectors</p>
+    <div class="header">
+        <h1>Research Portal: Bio-Kinetic Archives</h1>
+        <p>Restricted Access - Simulation Environment 2026</p>
     </div>
 
-    <div class="card" onclick="loadGame('https://watch.softcentral.top/slope/')">
-      <img src="https://play-lh.googleusercontent.com/u79S7Y0O7f_59m_Yp1W79S5uJ5uJ5uJ5uJ5uJ5uJ5uJ5uJ5uJ5uJ5uJ5uJ5uJ5uJ" alt="Slope">
-      <p>Module SL: Velocity Vectors</p>
+    <div id="display-container">
+        <p class="placeholder" id="msg">Awaiting module selection...</p>
+        <iframe id="screen" src=""></iframe>
     </div>
 
-    <div class="card" onclick="loadGame('https://theadvancedearth.com/rb/')">
-      <img src="https://play-lh.googleusercontent.com/6_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5" alt="Retro Bowl">
-      <p>Module RB: Strategic Analytics</p>
+    <div class="grid">
+        <button class="module-btn" onclick="play('https://2pu896.csb.app/')">
+            <span>Archive 64-A</span> Gravitational Constant Sim
+        </button>
+
+        <button class="module-btn" onclick="play('https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://h5gamess.com/slope/')">
+            <span>Archive SL-B</span> Velocity Vector Analysis
+        </button>
+
+        <button class="module-btn" onclick="play('https://classic.minecraft.net/')">
+            <span>Archive MC-V</span> Voxel Structural Integrity
+        </button>
+
+        <button class="module-btn" onclick="play('https://google-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url=https://v6p9d9t4.ssl.hwcdn.net/html/1453202/index.html')">
+            <span>Archive PT-X</span> High-Speed Momentum
+        </button>
     </div>
 
-    <div class="card" onclick="loadGame('https://raw.githack.com/top-games-hub/bitlife/main/index.html')">
-      <img src="https://play-lh.googleusercontent.com/3_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5" alt="Bitlife">
-      <p>Module BL: Probability Matrix</p>
-    </div>
-
-    <div class="card" onclick="loadGame('https://1v1.lol/')">
-      <img src="https://play-lh.googleusercontent.com/4_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5_8_5" alt="1v1">
-      <p>Module LOL: Structural Integrity</p>
-    </div>
-
-    <div class="card" onclick="loadGame('https://orteil.dashnet.org/cookieclicker/')">
-      <img src="https://orteil.dashnet.org/cookieclicker/img/perfectCookie.png" alt="Cookie">
-      <p>Module CC: Exponential Growth</p>
-    </div>
-
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+    <script>
+        /* LOGIC: The code that makes the buttons work */
+        function play(link) {
+            const frame = document.getElementById('screen');
+            const msg = document.getElementById('msg');
+            
+            msg.style.display = 'none'; // Hide the loading text
+            frame.style.display = 'block'; // Show the game screen
+            frame.src = link; // Load the game
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
