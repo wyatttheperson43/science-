@@ -1,65 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Molecular Dynamics Simulation Lab</title>
+    <title>Biochemical Data Portal</title>
     <style>
-        /* DESIGN: Making it look like a real science portal */
-        body { font-family: 'Courier New', Courier, monospace; background-color: #0d1117; color: #58a6ff; margin: 0; padding: 20px; text-align: center; }
-        .header { border-bottom: 2px solid #30363d; padding-bottom: 20px; margin-bottom: 30px; }
-        h1 { color: #f0f6fc; }
-        
-        /* THE GAME PLAYER */
-        #display-container { width: 90%; max-width: 900px; height: 550px; margin: 0 auto; background: #000; border: 1px solid #30363d; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+        body { font-family: sans-serif; background: #0b0e14; color: #c9d1d9; text-align: center; }
+        #display { width: 90%; height: 500px; margin: 20px auto; background: #000; border: 2px solid #30363d; border-radius: 8px; }
         iframe { width: 100%; height: 100%; border: none; display: none; }
-        .placeholder { color: #8b949e; font-style: italic; }
-
-        /* THE GRID */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
-        .module-btn { background: #21262d; border: 1px solid #30363d; color: #c9d1d9; padding: 15px; cursor: pointer; border-radius: 6px; transition: 0.2s; }
-        .module-btn:hover { background: #30363d; border-color: #8b949e; color: #58a6ff; }
-        .module-btn span { display: block; font-size: 12px; color: #8b949e; margin-bottom: 5px; }
+        .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 20px; }
+        button { background: #21262d; color: #58a6ff; border: 1px solid #30363d; padding: 10px 20px; border-radius: 6px; cursor: pointer; }
+        button:hover { background: #30363d; }
     </style>
 </head>
 <body>
-
-    <div class="header">
-        <h1>Research Portal: Bio-Kinetic Archives</h1>
-        <p>Restricted Access - Simulation Environment 2026</p>
+    <h1>Research Archive: Bio-Simulations</h1>
+    <div id="display">
+        <p id="status">Select a module below to start...</p>
+        <iframe id="game-frame" src=""></iframe>
     </div>
-
-    <div id="display-container">
-        <p class="placeholder" id="msg">Awaiting module selection...</p>
-        <iframe id="screen" src=""></iframe>
-    </div>
-
     <div class="grid">
-        <button class="module-btn" onclick="play('https://2pu896.csb.app/')">
-            <span>Archive 64-A</span> Gravitational Constant Sim
-        </button>
-
-        <button class="module-btn" onclick="play('https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://h5gamess.com/slope/')">
-            <span>Archive SL-B</span> Velocity Vector Analysis
-        </button>
-
-        <button class="module-btn" onclick="play('https://classic.minecraft.net/')">
-            <span>Archive MC-V</span> Voxel Structural Integrity
-        </button>
-
-        <button class="module-btn" onclick="play('https://google-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url=https://v6p9d9t4.ssl.hwcdn.net/html/1453202/index.html')">
-            <span>Archive PT-X</span> High-Speed Momentum
-        </button>
+        <button onclick="launch('https://64.online/')">Module 64: Gravity</button>
+        <button onclick="launch('https://slopegame.io/slope-game.embed')">Module SL: Velocity</button>
+        <button onclick="launch('https://geometry-lite.github.io/')">Module GD: Momentum</button>
     </div>
 
     <script>
-        /* LOGIC: The code that makes the buttons work */
-        function play(link) {
-            const frame = document.getElementById('screen');
-            const msg = document.getElementById('msg');
+        function launch(url) {
+            const frame = document.getElementById('game-frame');
+            const status = document.getElementById('status');
+            status.innerHTML = "Initializing simulation...";
+            frame.style.display = "block";
+            frame.src = url;
             
-            msg.style.display = 'none'; // Hide the loading text
-            frame.style.display = 'block'; // Show the game screen
-            frame.src = link; // Load the game
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // If it takes more than 5 seconds, remind user it might be a school block
+            setTimeout(() => {
+                if(status.style.display !== "none") {
+                    status.innerHTML = "If screen is blank, your school may have blocked this specific simulation link.";
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
