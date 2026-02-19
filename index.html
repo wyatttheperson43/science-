@@ -1,48 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Biochemistry Simulation Archive</title>
+    <title>Google Drive - Research Docs</title>
     <style>
-        body { font-family: 'Courier New', monospace; background: #0d1117; color: #58a6ff; text-align: center; padding: 20px; }
-        #display-box { width: 95%; height: 600px; margin: 20px auto; background: #000; border: 2px solid #30363d; position: relative; border-radius: 8px; }
-        iframe { width: 100%; height: 100%; border: none; display: none; }
-        .btn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; padding: 20px; }
-        .mod-btn { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 15px; cursor: pointer; border-radius: 6px; }
-        .mod-btn:hover { border-color: #58a6ff; background: #30363d; }
-        #direct-link { display: none; margin-top: 10px; color: #ff7b72; font-weight: bold; text-decoration: none; }
+        body { font-family: sans-serif; background: #f8f9fa; color: #202124; padding: 50px; text-align: center; }
+        .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .doc-card { width: 200px; padding: 20px; border: 1px solid #dadce0; border-radius: 8px; cursor: pointer; background: white; }
+        .doc-card:hover { box-shadow: 0 1px 3px rgba(60,64,67,0.3); }
+        h1 { font-weight: normal; color: #5f6368; }
     </style>
 </head>
 <body>
-    <h1>Bio-Kinetic Research Portal</h1>
-    
-    <div id="display-box">
-        <p id="msg">Awaiting Module Selection...</p>
-        <iframe id="viewer" src=""></iframe>
-    </div>
-    <a id="direct-link" href="#" target="_blank">⚠️ Game blocked in frame? Click here to launch in new tab.</a>
-
-    <div class="btn-grid">
-        <button class="mod-btn" onclick="launch('https://64.online/')">Module 64: Gravity</button>
-        <button class="mod-btn" onclick="launch('https://slopegame.io/slope-game.embed')">Module SL: Velocity</button>
-        <button class="mod-btn" onclick="launch('https://geometry-lite.github.io/')">Module GD: Momentum</button>
-        <button class="mod-btn" onclick="launch('https://classic.minecraft.net/')">Module MC: Voxel</button>
+    <h1>My Drive > Biochemistry Simulations</h1>
+    <div class="grid">
+        <div class="doc-card" onclick="openSim('https://64.online/')">📄 Lab_Report_64.pdf</div>
+        <div class="doc-card" onclick="openSim('https://slopegame.io/slope-game.embed')">📄 Velocity_Data.docx</div>
+        <div class="doc-card" onclick="openSim('https://classic.minecraft.net/')">📄 Structural_Voxel.xlsx</div>
     </div>
 
     <script>
-        function launch(url) {
-            const f = document.getElementById('viewer');
-            const m = document.getElementById('msg');
-            const d = document.getElementById('direct-link');
-            
-            m.style.display = 'none';
-            f.style.display = 'block';
-            f.src = url;
-            
-            // Setup the fallback link in case the frame blocks it
-            d.style.display = 'inline-block';
-            d.href = url;
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function openSim(url) {
+            // This opens the game in a new tab so it CAN'T be blocked by the 'frame' error
+            window.open(url, '_blank', 'noopener,noreferrer');
         }
     </script>
 </body>
